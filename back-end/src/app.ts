@@ -4,9 +4,13 @@ import { handlerError } from "./error"
 import userRouter from "./routes/user.routes"
 import productRouter from "./routes/product.routes"
 import cartRouter from "./routes/cart.routes"
+import cors from "cors"
+import helmet from "helmet"
 
 const app = express()
 
+app.use(helmet())
+app.use(cors())
 app.use(express.json())
 
 app.use("/users", userRouter)
