@@ -6,6 +6,8 @@ const User = z.object({
   password: z.string().nonempty().max(256),
 })
 
+const UserUpdate = User.partial()
+
 const UserAuth = z.object({
   email: z.string().nonempty().email(),
   password: z.string().nonempty(),
@@ -15,4 +17,4 @@ const UserAdm = User.extend({ isAdm: z.boolean().transform(() => true) })
 
 const UserReturn = User.extend({ isAdm: z.boolean() }).omit({ password: true })
 
-export { User, UserReturn, UserAdm, UserAuth }
+export { User, UserReturn, UserAdm, UserAuth, UserUpdate }
