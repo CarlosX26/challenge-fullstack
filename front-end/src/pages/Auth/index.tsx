@@ -32,7 +32,7 @@ export const AuthPage = () => {
         w="50%"
         justifyContent="center"
         alignItems="center"
-        gap="0.5rem"
+        gap="8px"
         borderRadius="56px 0 0 56px"
         bgGradient="linear(to-r, teal.600, gray.700)"
       >
