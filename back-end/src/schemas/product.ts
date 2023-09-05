@@ -9,8 +9,10 @@ const Product = z.object({
   price: z.number().nonnegative(),
 })
 
+const ProductUpdate = Product.partial()
+
 const ProductReturn = Product.extend({
   user: UserReturn,
 })
 
-export { Product, ProductReturn }
+export { Product, ProductReturn, ProductUpdate }
