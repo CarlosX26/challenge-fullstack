@@ -5,6 +5,7 @@ import { verifySchemaMiddleware } from "../middlewares/verifySchema.middleware"
 import { Product, ProductUpdate } from "../schemas/product"
 import {
   createProductController,
+  deleteProductController,
   readProductsController,
   updateProductController,
 } from "../controllers/product.controllers"
@@ -25,6 +26,12 @@ productRouter.patch(
   verifyUserIsAdmMiddleware,
   verifySchemaMiddleware(ProductUpdate),
   updateProductController
+)
+productRouter.delete(
+  "/:id",
+  verifyUserAuthMiddleware,
+  verifyUserIsAdmMiddleware,
+  deleteProductController
 )
 
 export default productRouter
