@@ -51,7 +51,7 @@ const addProductToCartService = async (
   })
 
   if (!cart) {
-    cart = cartRepo.create({ user: user! })
+    cart = cartRepo.create({ status: "PENDING", user: user! })
 
     await cartRepo.save(cart)
   }
