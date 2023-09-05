@@ -13,19 +13,19 @@ import { verifyEmailMiddleware } from "../middlewares/verifyEmail.middleware"
 
 const userRouter = Router()
 
-userRouter.post(
-  "/auth",
-  verifySchemaMiddleware(UserAuth),
-  verifyEmailMiddleware,
-  authUserController
-)
+userRouter.post("/auth", verifySchemaMiddleware(UserAuth), authUserController)
 userRouter.post(
   "",
   verifySchemaMiddleware(User),
   verifyEmailMiddleware,
   createUserController
 )
-userRouter.post("/admin", verifySchemaMiddleware(User), createUserAdmController)
+userRouter.post(
+  "/admin",
+  verifySchemaMiddleware(User),
+  verifyEmailMiddleware,
+  createUserAdmController
+)
 userRouter.patch(
   "/profile",
   verifyUserAuthMiddleware,

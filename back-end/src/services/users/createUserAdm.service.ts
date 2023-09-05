@@ -1,14 +1,12 @@
 import AppDataSource from "../../data-source"
 import { User } from "../../entities/user.entity"
-import { IUserAdm, IUserReturn } from "../../interfaces/user"
+import { IUser, IUserReturn } from "../../interfaces/user"
 import { UserReturn } from "../../schemas/user"
 
-const createUserAdmService = async (
-  payload: IUserAdm
-): Promise<IUserReturn> => {
+const createUserAdmService = async (payload: IUser): Promise<IUserReturn> => {
   const userRepo = AppDataSource.getRepository(User)
 
-  const user = userRepo.create(payload)
+  const user = userRepo.create({ ...payload, isAdm: true })
 
   await userRepo.save(user)
 

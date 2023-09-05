@@ -13,8 +13,6 @@ const UserAuth = z.object({
   password: z.string().nonempty(),
 })
 
-const UserAdm = User.extend({ isAdm: z.boolean().transform(() => true) })
-
 const UserReturn = User.extend({ isAdm: z.boolean() }).omit({ password: true })
 
-export { User, UserReturn, UserAdm, UserAuth, UserUpdate }
+export { User, UserReturn, UserAuth, UserUpdate }
