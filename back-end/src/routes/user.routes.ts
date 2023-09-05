@@ -5,14 +5,26 @@ import {
   authUserController,
   createUserAdmController,
   createUserController,
+  deleteUserController,
   updateUserController,
 } from "../controllers/user.controllers"
 import { verifyUserAuthMiddleware } from "../middlewares/verifyUserAuth.middleware"
+import { verifyEmailMiddleware } from "../middlewares/verifyEmail.middleware"
 
 const userRouter = Router()
 
-userRouter.post("/auth", verifySchemaMiddleware(UserAuth), authUserController)
-userRouter.post("", verifySchemaMiddleware(User), createUserController)
+userRouter.post(
+  "/auth",
+  verifySchemaMiddleware(UserAuth),
+  verifyEmailMiddleware,
+  authUserController
+)
+userRouter.post(
+  "",
+  verifySchemaMiddleware(User),
+  verifyEmailMiddleware,
+  createUserController
+)
 userRouter.post("/admin", verifySchemaMiddleware(User), createUserAdmController)
 userRouter.patch(
   "/profile",
@@ -20,5 +32,6 @@ userRouter.patch(
   verifySchemaMiddleware(UserUpdate),
   updateUserController
 )
+userRouter.delete("/profile", verifyUserAuthMiddleware, deleteUserController)
 
 export default userRouter
