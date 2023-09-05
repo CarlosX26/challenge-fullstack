@@ -14,7 +14,9 @@ const readProductsCartService = async (
       status: "PENDING",
     },
     relations: {
-      productCart: true,
+      productCart: {
+        product: true,
+      },
     },
   })
 

@@ -12,7 +12,9 @@ const cartCheckoutService = async (userId: string): Promise<Cart> => {
       },
     },
     relations: {
-      productCart: true,
+      productCart: {
+        product: true,
+      },
     },
   })
 
