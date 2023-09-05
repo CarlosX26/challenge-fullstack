@@ -72,10 +72,10 @@ export const ModalAddProduct = () => {
                 type="text"
                 placeholder="Url da imagem aqui(opcional)"
                 variant="filled"
-                {...register("img_url")}
+                {...register("imgUrl")}
               />
-              {errors.img_url?.message && (
-                <FormErrorMessage>{errors.img_url.message}</FormErrorMessage>
+              {errors.imgUrl?.message && (
+                <FormErrorMessage>{errors.imgUrl?.message}</FormErrorMessage>
               )}
             </FormControl>
 
