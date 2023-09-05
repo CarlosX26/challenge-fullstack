@@ -5,6 +5,7 @@ import { Cart } from "../schemas/cart"
 import {
   addProductToCartController,
   readProductsCartController,
+  updateProductToCartController,
 } from "../controllers/cart.controllers"
 
 const cartRouter = Router()
@@ -14,6 +15,12 @@ cartRouter.post(
   verifyUserAuthMiddleware,
   verifySchemaMiddleware(Cart),
   addProductToCartController
+)
+cartRouter.patch(
+  "/products/:id",
+  verifyUserAuthMiddleware,
+  verifySchemaMiddleware(Cart),
+  updateProductToCartController
 )
 cartRouter.get("/view", verifyUserAuthMiddleware, readProductsCartController)
 
