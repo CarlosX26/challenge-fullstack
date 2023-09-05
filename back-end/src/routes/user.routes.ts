@@ -6,6 +6,7 @@ import {
   createUserAdmController,
   createUserController,
   deleteUserController,
+  readUserController,
   updateUserController,
 } from "../controllers/user.controllers"
 import { verifyUserAuthMiddleware } from "../middlewares/verifyUserAuth.middleware"
@@ -26,6 +27,7 @@ userRouter.post(
   verifyEmailMiddleware,
   createUserAdmController
 )
+userRouter.get("/profile", verifyUserAuthMiddleware, readUserController)
 userRouter.patch(
   "/profile",
   verifyUserAuthMiddleware,
