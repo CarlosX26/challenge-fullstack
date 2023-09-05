@@ -4,6 +4,7 @@ import { verifySchemaMiddleware } from "../middlewares/verifySchema.middleware"
 import { Cart } from "../schemas/cart"
 import {
   addProductToCartController,
+  cartCheckoutController,
   deleteProductToCartController,
   readProductsCartController,
   updateProductToCartController,
@@ -28,6 +29,8 @@ cartRouter.delete(
   verifyUserAuthMiddleware,
   deleteProductToCartController
 )
+
+cartRouter.post("/checkout", verifyUserAuthMiddleware, cartCheckoutController)
 cartRouter.get("/view", verifyUserAuthMiddleware, readProductsCartController)
 
 export default cartRouter
