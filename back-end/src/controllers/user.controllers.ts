@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import createUserService from "../services/users/createUser.service"
 import createUserAdmService from "../services/users/createUserAdm.service"
 import authUserService from "../services/users/authUser.service"
+import updateUserService from "../services/users/updateUser.service"
 
 const authUserController = async (req: Request, res: Response) => {
   const data = await authUserService(req.body)
@@ -21,4 +22,15 @@ const createUserAdmController = async (req: Request, res: Response) => {
   return res.status(201).json(data)
 }
 
-export { createUserController, createUserAdmController, authUserController }
+const updateUserController = async (req: Request, res: Response) => {
+  const data = await updateUserService(req.body, req.userAuthId)
+
+  return res.status(200).json(data)
+}
+
+export {
+  createUserController,
+  createUserAdmController,
+  authUserController,
+  updateUserController,
+}
