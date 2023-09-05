@@ -1,13 +1,12 @@
 import AppDataSource from "../../data-source"
 import AppError from "../../error"
 import { Product } from "../../entities/product.entity"
-import { IProductReturn, IProductUpdate } from "../../interfaces/product"
-import { ProductReturn } from "../../schemas/product"
+import { IProductUpdate } from "../../interfaces/product"
 
 const updateProductService = async (
   payload: IProductUpdate,
   productId: string
-): Promise<IProductReturn> => {
+): Promise<Product> => {
   const productRepo = AppDataSource.getRepository(Product)
 
   const product = await productRepo.findOneBy({ id: productId })
@@ -18,7 +17,7 @@ const updateProductService = async (
 
   const productUpdated = await productRepo.save({ ...product, ...payload })
 
-  return ProductReturn.parse(productUpdated)
+  return productUpdated
 }
 
 export default updateProductService
