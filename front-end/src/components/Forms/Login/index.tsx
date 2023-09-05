@@ -13,8 +13,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Login } from "../../../validations/auth"
 import { ILogin } from "../../../validations/types"
+import { IForm } from "../../../pages/Auth"
+import { motion } from "framer-motion"
 
-export const FormLogin = () => {
+interface IFormLogin {
+  setForm: React.Dispatch<React.SetStateAction<IForm>>
+}
+
+export const FormLogin = ({ setForm }: IFormLogin) => {
   const {
     register,
     handleSubmit,
@@ -22,7 +28,14 @@ export const FormLogin = () => {
   } = useForm<ILogin>({ resolver: zodResolver(Login) })
 
   return (
-    <Flex flexDir="column" gap="2rem" w="100%" maxW="400px">
+    <Flex
+      as={motion.div}
+      flexDir="column"
+      gap="2rem"
+      w="100%"
+      maxW="400px"
+      animate={{ rotate: [180, 0] }}
+    >
       <Heading>Login</Heading>
 
       <Flex
@@ -62,7 +75,10 @@ export const FormLogin = () => {
         </Button>
 
         <Text>
-          Não possui cadastro? <Link color="teal.600">cadastre-se</Link>
+          Não possui cadastro?{" "}
+          <Link color="teal.600" onClick={() => setForm("Register")}>
+            cadastre-se
+          </Link>
         </Text>
       </Flex>
     </Flex>
