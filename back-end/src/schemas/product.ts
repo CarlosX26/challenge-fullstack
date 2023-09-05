@@ -8,7 +8,7 @@ const Product = z.object({
     .max(128)
     .optional()
     .transform((description) => (Boolean(description) ? description : "")),
-  img_url: z
+  imgUrl: z
     .string()
     .max(256)
     .optional()

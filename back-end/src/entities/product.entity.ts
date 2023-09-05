@@ -20,7 +20,7 @@ export class Product {
   description: string
 
   @Column({ length: 256, nullable: true })
-  img_url: string
+  imgUrl: string
 
   @Column({ type: "integer" })
   inventory: number
