@@ -31,7 +31,7 @@ const authUserService = async ({
     { name: user.name, isAdm: user.isAdm },
     process.env.SECRET_KEY!,
     {
-      expiresIn: "24h",
+      expiresIn: "1h",
       subject: user.id,
     }
   )
