@@ -3,7 +3,10 @@ import { verifyUserAuthMiddleware } from "../middlewares/verifyUserAuth.middlewa
 import { verifyUserIsAdmMiddleware } from "../middlewares/verifyUserIsAdm.middleware"
 import { verifySchemaMiddleware } from "../middlewares/verifySchema.middleware"
 import { Product } from "../schemas/product"
-import { createProductController } from "../controllers/product.controllers"
+import {
+  createProductController,
+  readProductsController,
+} from "../controllers/product.controllers"
 
 const productRouter = Router()
 
@@ -14,5 +17,6 @@ productRouter.post(
   verifySchemaMiddleware(Product),
   createProductController
 )
+productRouter.get("", readProductsController)
 
 export default productRouter
