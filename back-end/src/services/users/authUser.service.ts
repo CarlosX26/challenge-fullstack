@@ -27,10 +27,14 @@ const authUserService = async ({
     throw new AppError("Wrong email or password.", 401)
   }
 
-  const token = sign({ name: user.name }, process.env.SECRET_KEY!, {
-    expiresIn: "24h",
-    subject: user.id,
-  })
+  const token = sign(
+    { name: user.name, isAdm: user.isAdm },
+    process.env.SECRET_KEY!,
+    {
+      expiresIn: "24h",
+      subject: user.id,
+    }
+  )
 
   return {
     token,
