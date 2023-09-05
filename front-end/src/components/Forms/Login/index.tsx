@@ -15,17 +15,26 @@ import { Login } from "../../../validations/auth"
 import { ILogin } from "../../../validations/types"
 import { IForm } from "../../../pages/Auth"
 import { motion } from "framer-motion"
+import { useAuthContext } from "../../../contexts/authContext"
+import { useLocation } from "react-router-dom"
 
 interface IFormLogin {
   setForm: React.Dispatch<React.SetStateAction<IForm>>
 }
 
 export const FormLogin = ({ setForm }: IFormLogin) => {
+  const location = useLocation()
+  const { loginUser, loginUserAdm } = useAuthContext()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ILogin>({ resolver: zodResolver(Login) })
+  const submit = (loginData: ILogin) => {
+    const isAdm = location.pathname.includes("adm")
+
+    isAdm ? loginUserAdm(loginData) : loginUser(loginData)
+  }
 
   return (
     <Flex
@@ -40,7 +49,7 @@ export const FormLogin = ({ setForm }: IFormLogin) => {
 
       <Flex
         as={"form"}
-        onSubmit={handleSubmit(() => {})}
+        onSubmit={handleSubmit(submit)}
         flexDir="column"
         gap="1rem"
       >
