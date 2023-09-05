@@ -15,17 +15,29 @@ import { IRegister } from "../../../validations/types"
 import { Register } from "../../../validations/auth"
 import { IForm } from "../../../pages/Auth"
 import { motion } from "framer-motion"
+import { useLocation } from "react-router-dom"
+import { useAuthContext } from "../../../contexts/authContext"
 
 interface IFormRegister {
   setForm: React.Dispatch<React.SetStateAction<IForm>>
 }
 
 export const FormRegister = ({ setForm }: IFormRegister) => {
+  const location = useLocation()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IRegister>({ resolver: zodResolver(Register) })
+  const { registerUser, registerUserAdm } = useAuthContext()
+
+  const submit = (registerData: IRegister) => {
+    const isAdm = location.pathname.includes("adm")
+
+    isAdm ? registerUserAdm(registerData) : registerUser(registerData)
+
+    setForm("Login")
+  }
 
   return (
     <Flex
@@ -40,7 +52,7 @@ export const FormRegister = ({ setForm }: IFormRegister) => {
 
       <Flex
         as={"form"}
-        onSubmit={handleSubmit(() => {})}
+        onSubmit={handleSubmit(submit)}
         flexDir="column"
         gap="1rem"
       >
