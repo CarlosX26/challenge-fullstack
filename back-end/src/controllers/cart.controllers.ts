@@ -3,6 +3,7 @@ import addProductToCartService from "../services/carts/addProductToCart.service"
 import readProductsCartService from "../services/carts/readProductsCart.service"
 import updateProductToCartService from "../services/carts/updateProductToCart.service"
 import deleteProductToCartService from "../services/carts/deleteProductToCart.service"
+import cartCheckoutService from "../services/carts/cartCheckout.service"
 
 const addProductToCartController = async (req: Request, res: Response) => {
   const data = await addProductToCartService(
@@ -36,9 +37,16 @@ const deleteProductToCartController = async (req: Request, res: Response) => {
   return res.status(204).json(data)
 }
 
+const cartCheckoutController = async (req: Request, res: Response) => {
+  const data = await cartCheckoutService(req.userAuthId)
+
+  return res.status(201).json(data)
+}
+
 export {
   addProductToCartController,
   readProductsCartController,
   updateProductToCartController,
   deleteProductToCartController,
+  cartCheckoutController,
 }
