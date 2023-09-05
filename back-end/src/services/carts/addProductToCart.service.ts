@@ -24,6 +24,23 @@ const addProductToCartService = async (
     throw new AppError("Product not found.", 404)
   }
 
+  const productInCart = await cartRepo.findOne({
+    where: {
+      user: {
+        id: userId,
+      },
+      productCart: {
+        product: {
+          id: productId,
+        },
+      },
+    },
+  })
+
+  if (productInCart) {
+    throw new AppError("Product is already in the cart.")
+  }
+
   const user = await userRepo.findOneBy({ id: userId })
 
   let cart = await cartRepo.findOne({
