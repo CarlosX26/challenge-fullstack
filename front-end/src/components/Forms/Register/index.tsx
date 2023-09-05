@@ -57,15 +57,15 @@ export const FormRegister = ({ setForm }: IFormRegister) => {
         gap="1rem"
       >
         <FormControl>
-          <FormLabel>Name</FormLabel>
+          <FormLabel>Nome</FormLabel>
           <Input
             type="text"
             placeholder="Digite seu nome"
             {...register("name")}
             variant="filled"
           />
-          {errors.email?.message && (
-            <FormErrorMessage>{errors.email.message}</FormErrorMessage>
+          {errors.name?.message && (
+            <FormErrorMessage>{errors.name.message}</FormErrorMessage>
           )}
         </FormControl>
 
