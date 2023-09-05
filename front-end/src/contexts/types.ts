@@ -5,6 +5,15 @@ interface IAuthContext {
   loginUserAdm(loginData: ILogin): Promise<void>
   registerUser(registerData: IRegister): Promise<void>
   registerUserAdm(registerData: IRegister): Promise<void>
+  user: IUser | null
+  loading: boolean
+  logout(): void
 }
 
-export type { IAuthContext }
+interface IUser {
+  name: string
+  email: string
+  isAdm: boolean
+}
+
+export type { IAuthContext, IUser }
