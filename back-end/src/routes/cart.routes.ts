@@ -2,7 +2,10 @@ import { Router } from "express"
 import { verifyUserAuthMiddleware } from "../middlewares/verifyUserAuth.middleware"
 import { verifySchemaMiddleware } from "../middlewares/verifySchema.middleware"
 import { Cart } from "../schemas/cart"
-import { addProductToCartController } from "../controllers/cart.controllers"
+import {
+  addProductToCartController,
+  readProductsCartController,
+} from "../controllers/cart.controllers"
 
 const cartRouter = Router()
 
@@ -12,5 +15,6 @@ cartRouter.post(
   verifySchemaMiddleware(Cart),
   addProductToCartController
 )
+cartRouter.get("/view", verifyUserAuthMiddleware, readProductsCartController)
 
 export default cartRouter
