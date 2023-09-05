@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import createProductService from "../services/products/createProduct.service"
 import readProductsService from "../services/products/readProducts.service"
 import updateProductService from "../services/products/updateProduct.service"
+import deleteProductService from "../services/products/deleteProduct.service"
 
 const createProductController = async (req: Request, res: Response) => {
   const data = await createProductService(req.body, req.userAuthId)
@@ -21,8 +22,15 @@ const updateProductController = async (req: Request, res: Response) => {
   return res.status(200).json(data)
 }
 
+const deleteProductController = async (req: Request, res: Response) => {
+  const data = await deleteProductService(req.params.id)
+
+  return res.status(204).json(data)
+}
+
 export {
   createProductController,
   readProductsController,
   updateProductController,
+  deleteProductController,
 }
