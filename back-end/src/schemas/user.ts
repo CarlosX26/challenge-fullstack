@@ -6,6 +6,8 @@ const User = z.object({
   password: z.string().nonempty().max(256),
 })
 
+const UserAdm = User.extend({ isAdm: z.boolean().transform(() => true) })
+
 const UserReturn = User.extend({ isAdm: z.boolean() }).omit({ password: true })
 
-export { User, UserReturn }
+export { User, UserReturn, UserAdm }
