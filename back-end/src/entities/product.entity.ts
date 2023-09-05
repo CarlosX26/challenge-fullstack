@@ -1,5 +1,14 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm"
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm"
+import { User } from "./user.entity"
+import { ProductCart } from "./productCart.entity"
 
+@Entity("products")
 export class Product {
   @PrimaryGeneratedColumn("uuid")
   id: string
@@ -18,4 +27,10 @@ export class Product {
 
   @Column({ type: "integer" })
   price: number
+
+  @ManyToOne(() => User, (user) => user.products)
+  user: User
+
+  @OneToMany(() => ProductCart, (productCart) => productCart.product)
+  productCart: ProductCart[]
 }

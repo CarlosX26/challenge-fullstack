@@ -4,8 +4,11 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm"
+import { Product } from "./product.entity"
+import { Cart } from "./cart.entity"
 
 @Entity("user")
 export class User {
@@ -31,4 +34,10 @@ export class User {
       this.password = hashSync(this.password, 12)
     }
   }
+
+  @OneToMany(() => Product, (product) => product.user)
+  products: Product[]
+
+  @OneToMany(() => Cart, (cart) => cart.user)
+  carts: Cart[]
 }
