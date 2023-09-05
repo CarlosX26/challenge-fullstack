@@ -1,8 +1,11 @@
 import { z } from "zod"
 import { Login, Register } from "./auth"
+import { Product } from "./product"
 
 type ILogin = z.infer<typeof Login>
 
 type IRegister = z.infer<typeof Register>
 
-export type { ILogin, IRegister }
+type IProduct = z.infer<typeof Product>
+
+export type { ILogin, IRegister, IProduct }

@@ -16,4 +16,10 @@ interface IUser {
   isAdm: boolean
 }
 
-export type { IAuthContext, IUser }
+interface IAdminContext {
+  isOpen: boolean
+  onOpen(): void
+  onClose(): void
+}
+
+export type { IAuthContext, IUser, IAdminContext }
