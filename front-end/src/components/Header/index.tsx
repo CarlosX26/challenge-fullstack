@@ -9,6 +9,7 @@ import {
   MenuList,
   Image,
   Button,
+  Text,
 } from "@chakra-ui/react"
 import { Logo } from "../Logo"
 import { Link, useLocation } from "react-router-dom"
@@ -22,9 +23,11 @@ export const Header = () => {
 
   const { user, logout } = useAuthContext()
 
-  const { onOpen } = useCartContext()
+  const { onOpen, cartList } = useCartContext()
 
   const isAdm = location.pathname.includes("adm")
+
+  const totalItems = cartList.reduce((acc, acv) => acc + acv.amount, 0)
 
   return (
     <Flex as={"header"} w="100%" borderBottom="2px" borderColor="teal.600">
@@ -41,7 +44,7 @@ export const Header = () => {
         <Flex alignItems="center" gap="16px">
           {!isAdm && (
             <Flex gap="16px" alignItems="center">
-              <Button variant="unstyled" onClick={onOpen}>
+              <Button variant="unstyled" onClick={onOpen} pos="relative">
                 <Image
                   m="0 auto"
                   w="32px"
@@ -49,6 +52,19 @@ export const Header = () => {
                   src={cartIcon}
                   alt="cart_icon"
                 />
+                <Text
+                  pos="absolute"
+                  top="0"
+                  right="0"
+                  bg="teal.600"
+                  color="white"
+                  borderRadius="full"
+                  w="16px"
+                  h="16px"
+                  fontSize="12px"
+                >
+                  {totalItems}
+                </Text>
               </Button>
 
               <Input
