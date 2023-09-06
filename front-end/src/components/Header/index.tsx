@@ -24,14 +24,11 @@ export const Header = () => {
   const location = useLocation()
 
   const { user, logout } = useAuthContext()
-
-  const { onOpen, cartList } = useCartContext()
+  const { onOpen, totalItems } = useCartContext()
 
   const { filter, setFilter } = useProductContext()
 
   const isAdm = location.pathname.includes("adm")
-
-  const totalItems = cartList.reduce((acc, acv) => acc + acv.amount, 0)
 
   const [input, setInput] = useState("")
 
