@@ -8,12 +8,18 @@ import {
   ModalHeader,
   ModalOverlay,
   VStack,
+  Text,
 } from "@chakra-ui/react"
 import { useCartContext } from "../../../contexts/cartContext"
 import { ModalCartCardProduct } from "./ModalCartCardProduct"
 
 export const ModalCart = () => {
   const { isOpen, onClose, cartList } = useCartContext()
+
+  const totalCart = cartList.reduce(
+    (acc, acv) => acc + acv.amount * acv.product.price,
+    0
+  )
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -33,7 +39,18 @@ export const ModalCart = () => {
               ))}
             </Flex>
 
-            <Flex>
+            <Flex flexDir="column" w="100%">
+              <Flex>
+                <Text fontWeight="bold" w="50%">
+                  Total
+                </Text>
+                <Text fontWeight="bold" w="50%" textAlign="end">
+                  {totalCart.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </Text>
+              </Flex>
               <Button mt="16px" type="submit">
                 Finalizar compra
               </Button>
