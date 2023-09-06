@@ -27,7 +27,7 @@ export const ModalEditProduct = () => {
     adminProducts,
     updateProduct,
     currentProduct,
-    handleProduct,
+    setCurrentProduct,
   } = useAdminContext()
 
   const {
@@ -41,13 +41,15 @@ export const ModalEditProduct = () => {
   })
 
   const changeProduct = (e: ChangeEvent<HTMLSelectElement>) => {
-    handleProduct(e.target.value)
+    const productId = e.target.value
+    const product = adminProducts.find((product) => product.id === productId)
+    setCurrentProduct(product)
 
-    setValue("name", currentProduct!.name)
-    setValue("description", currentProduct!.description)
-    setValue("imgUrl", currentProduct!.imgUrl)
-    setValue("inventory", currentProduct!.inventory)
-    setValue("price", currentProduct!.price)
+    setValue("name", product!.name)
+    setValue("description", product!.description)
+    setValue("imgUrl", product!.imgUrl)
+    setValue("inventory", product!.inventory)
+    setValue("price", product!.price)
   }
 
   return (
