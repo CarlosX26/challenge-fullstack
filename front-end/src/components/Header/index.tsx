@@ -7,16 +7,22 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Image,
+  Button,
 } from "@chakra-ui/react"
 import { Logo } from "../Logo"
 import { Link, useLocation } from "react-router-dom"
 import { useAuthContext } from "../../contexts/authContext"
 import { SearchIcon } from "@chakra-ui/icons"
+import cartIcon from "../../assets/shoppingCart.svg"
+import { useCartContext } from "../../contexts/cartContext"
 
 export const Header = () => {
   const location = useLocation()
 
   const { user, logout } = useAuthContext()
+
+  const { onOpen } = useCartContext()
 
   const isAdm = location.pathname.includes("adm")
 
@@ -34,7 +40,17 @@ export const Header = () => {
 
         <Flex alignItems="center" gap="16px">
           {!isAdm && (
-            <Flex gap="16px">
+            <Flex gap="16px" alignItems="center">
+              <Button variant="unstyled" onClick={onOpen}>
+                <Image
+                  m="0 auto"
+                  w="32px"
+                  h="32px"
+                  src={cartIcon}
+                  alt="cart_icon"
+                />
+              </Button>
+
               <Input
                 type="text"
                 placeholder="Pesquise um item"
