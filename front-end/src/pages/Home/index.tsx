@@ -2,8 +2,11 @@ import { Grid } from "@chakra-ui/react"
 import { Header } from "../../components/Header"
 import { Container } from "../../components/Container"
 import { CardProduct } from "../../components/CardProduct"
+import { useProductContext } from "../../contexts/productContext"
 
 export const Home = () => {
+  const { products } = useProductContext()
+
   return (
     <>
       <Header />
@@ -19,8 +22,8 @@ export const Home = () => {
           }}
           gap="1rem"
         >
-          {[1, 3, 0, 2, 88, 87].map((n) => (
-            <CardProduct key={n} />
+          {products.map((product) => (
+            <CardProduct key={product.id} product={product} />
           ))}
         </Grid>
       </Container>

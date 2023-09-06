@@ -1,4 +1,4 @@
-import { ILogin, IProduct, IRegister } from "../validations/types"
+import { ILogin, IProductForm, IRegister } from "../validations/types"
 
 interface IAuthContext {
   loginUser(loginData: ILogin): Promise<void>
@@ -19,21 +19,21 @@ interface IUser {
 interface IAdminContext {
   isOpen: boolean
   modal: IModal
-  adminProducts: IProductAdmin[]
-  currentProduct: IProductAdmin | undefined
+  adminProducts: IProduct[]
+  currentProduct: IProduct | undefined
   onClose(): void
   openModalAddProduct(): void
   openModalEditProduct(): void
   openModalDeleteProduct(): void
   handleProduct(productId: string): void
-  createProduct(productData: IProduct): Promise<void>
-  updateProduct(productData: IProduct): Promise<void>
+  createProduct(productData: IProductForm): Promise<void>
+  updateProduct(productData: IProductForm): Promise<void>
   deleteProduct(): Promise<void>
 }
 
-export type IModal = "addProduct" | "editProduct" | "deleteProduct"
+type IModal = "addProduct" | "editProduct" | "deleteProduct"
 
-interface IProductAdmin {
+interface IProduct {
   id: string
   name: string
   description: string
@@ -42,4 +42,15 @@ interface IProductAdmin {
   price: number
 }
 
-export type { IAuthContext, IUser, IAdminContext, IProductAdmin }
+interface IProductContext {
+  products: IProduct[]
+}
+
+export type {
+  IAuthContext,
+  IUser,
+  IAdminContext,
+  IProduct,
+  IModal,
+  IProductContext,
+}

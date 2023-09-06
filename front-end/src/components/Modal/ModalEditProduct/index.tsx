@@ -17,7 +17,7 @@ import { useAdminContext } from "../../../contexts/adminContext"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Product } from "../../../validations/product"
-import { IProduct } from "../../../validations/types"
+import { IProductForm } from "../../../validations/types"
 import { ChangeEvent } from "react"
 
 export const ModalEditProduct = () => {
@@ -35,7 +35,7 @@ export const ModalEditProduct = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<IProduct>({
+  } = useForm<IProductForm>({
     resolver: zodResolver(Product),
     defaultValues: { ...currentProduct },
   })

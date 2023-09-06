@@ -8,25 +8,32 @@ import {
   CardFooter,
   Button,
 } from "@chakra-ui/react"
-import macImg from "../../assets/macbook.jpg"
+import { IProduct } from "../../contexts/types"
+import noImg from "../../assets/noImg.jpg"
 
-export const CardProduct = () => (
+export const CardProduct = ({ product }: { product: IProduct }) => (
   <Card
     border="1px"
     borderColor="gray.100"
     _hover={{ borderColor: "teal.600" }}
   >
     <CardBody>
-      <Image borderRadius="md" src={macImg} alt="product image" />
+      <Image
+        borderRadius="md"
+        src={product.imgUrl}
+        alt="product image"
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null
+          currentTarget.src = noImg
+        }}
+      />
 
       <VStack>
-        <Heading pt="8px" size="md">
-          Living room Sofa
+        <Heading pt="8px" size="sm">
+          {product.name}
         </Heading>
 
-        <Text>
-          This sofa is perfect for modern tropical spaces, baroque inspired.
-        </Text>
+        <Text>{product.description}</Text>
       </VStack>
 
       <CardFooter
@@ -34,9 +41,13 @@ export const CardProduct = () => (
         p="0"
         justifyContent="space-between"
         alignItems="center"
+        flexWrap="wrap"
       >
-        <Text color="teal.600" fontSize="2xl">
-          $450
+        <Text color="teal.600" fontSize="lg">
+          {product.price.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}
         </Text>
         <Button variant="solid" colorScheme="blue">
           Comprar
