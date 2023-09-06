@@ -12,8 +12,10 @@ import {
 } from "@chakra-ui/react"
 import { useCartContext } from "../../../contexts/cartContext"
 import { ModalCartCardProduct } from "./ModalCartCardProduct"
+import { useAuthContext } from "../../../contexts/authContext"
 
 export const ModalCart = () => {
+  const { user } = useAuthContext()
   const { isOpen, onClose, cartList, checkout, loading } = useCartContext()
 
   const totalCart = cartList.reduce(
@@ -58,15 +60,17 @@ export const ModalCart = () => {
                   })}
                 </Text>
               </Flex>
-              <Button
-                disabled={loading}
-                mt="16px"
-                type="submit"
-                onClick={checkout}
-              >
-                {!loading && "Finalizar compra"}
-                {loading && "Enviando pedido..."}
-              </Button>
+              {user && (
+                <Button
+                  disabled={loading}
+                  mt="16px"
+                  type="submit"
+                  onClick={checkout}
+                >
+                  {!loading && "Finalizar compra"}
+                  {loading && "Enviando pedido..."}
+                </Button>
+              )}
             </Flex>
           </VStack>
         </ModalBody>

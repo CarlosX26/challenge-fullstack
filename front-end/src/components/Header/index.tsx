@@ -25,12 +25,11 @@ export const Header = () => {
 
   const { user, logout } = useAuthContext()
   const { onOpen, totalItems } = useCartContext()
-
   const { filter, setFilter } = useProductContext()
 
-  const isAdm = location.pathname.includes("adm")
-
   const [input, setInput] = useState("")
+
+  const isAdm = location.pathname.includes("adm")
 
   const searchProduct = () => {
     setFilter(input)
