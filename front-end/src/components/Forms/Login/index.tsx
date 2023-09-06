@@ -30,11 +30,14 @@ export const FormLogin = ({ setForm }: IFormLogin) => {
     handleSubmit,
     formState: { errors },
   } = useForm<ILogin>({ resolver: zodResolver(Login) })
+
   const submit = (loginData: ILogin) => {
     const isAdm = location.pathname.includes("adm")
 
     isAdm ? loginUserAdm(loginData) : loginUser(loginData)
   }
+
+  console.log(errors)
 
   return (
     <Flex
@@ -53,7 +56,7 @@ export const FormLogin = ({ setForm }: IFormLogin) => {
         flexDir="column"
         gap="1rem"
       >
-        <FormControl>
+        <FormControl isInvalid={Boolean(errors.email?.message)}>
           <FormLabel>Email</FormLabel>
           <Input
             type="text"
@@ -61,12 +64,10 @@ export const FormLogin = ({ setForm }: IFormLogin) => {
             {...register("email")}
             variant="filled"
           />
-          {errors.email?.message && (
-            <FormErrorMessage>{errors.email.message}</FormErrorMessage>
-          )}
+          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
         </FormControl>
 
-        <FormControl>
+        <FormControl isInvalid={Boolean(errors.password?.message)}>
           <FormLabel>Senha</FormLabel>
           <Input
             type="password"
@@ -74,9 +75,7 @@ export const FormLogin = ({ setForm }: IFormLogin) => {
             {...register("password")}
             variant="filled"
           />
-          {errors.password?.message && (
-            <FormErrorMessage>{errors.password.message}</FormErrorMessage>
-          )}
+          <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
         </FormControl>
 
         <Button type="submit" variant="solid">
