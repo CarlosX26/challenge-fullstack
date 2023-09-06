@@ -27,6 +27,7 @@ const addProductToCartService = async (
 
   const productInCart = await cartRepo.findOne({
     where: {
+      status: "PENDING",
       user: {
         id: userId,
       },
