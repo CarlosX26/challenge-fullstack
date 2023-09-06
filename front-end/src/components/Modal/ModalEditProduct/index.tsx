@@ -54,7 +54,7 @@ export const ModalEditProduct = () => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
 
-      <ModalContent>
+      <ModalContent mx={{ base: "16px", sm: "0" }}>
         <ModalHeader>Editar produto</ModalHeader>
         <ModalCloseButton />
         <ModalBody as={"form"} onSubmit={handleSubmit(updateProduct)}>

@@ -25,12 +25,19 @@ export const ModalCart = () => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
 
-      <ModalContent>
+      <ModalContent mx={{ base: "16px", sm: "0" }}>
         <ModalHeader>Carrinho</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <VStack>
-            <Flex as={"ul"} flexDir="column" w="100%" gap="16px">
+            <Flex
+              as={"ul"}
+              flexDir="column"
+              w="100%"
+              gap="16px"
+              maxH="264px"
+              overflowY="scroll"
+            >
               {cartList.map((cartProduct) => (
                 <ModalCartCardProduct
                   key={cartProduct.product.name}
