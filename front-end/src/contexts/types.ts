@@ -28,9 +28,10 @@ interface IAdminContext {
   handleProduct(productId: string): void
   createProduct(productData: IProduct): Promise<void>
   updateProduct(productData: IProduct): Promise<void>
+  deleteProduct(): Promise<void>
 }
 
-export type IModal = "addProduct" | "editProduct" | "deleteproduct"
+export type IModal = "addProduct" | "editProduct" | "deleteProduct"
 
 interface IProductAdmin {
   id: string

@@ -23,7 +23,7 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
     onOpen()
   }
   const openModalDeleteProduct = () => {
-    setModal("deleteproduct")
+    setModal("deleteProduct")
     onOpen()
   }
 
@@ -101,6 +101,29 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
+  const deleteProduct = async () => {
+    try {
+      const token = localStorage.getItem("@BESTSHOP:TOKEN")
+
+      await api.delete(`/products/${currentProduct?.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      const updateAdminProducts = adminProducts.filter(
+        (product) => product.id !== currentProduct?.id
+      )
+
+      setAdminProducts(updateAdminProducts)
+
+      toast.success("Produto deletado")
+      onClose()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <AdminContext.Provider
       value={{
@@ -114,6 +137,7 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
         openModalDeleteProduct,
         createProduct,
         updateProduct,
+        deleteProduct,
         handleProduct,
       }}
     >
