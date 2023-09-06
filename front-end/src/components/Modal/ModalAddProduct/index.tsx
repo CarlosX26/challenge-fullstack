@@ -16,7 +16,7 @@ import { useAdminContext } from "../../../contexts/adminContext"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Product } from "../../../validations/product"
-import { IProduct } from "../../../validations/types"
+import { IProductForm } from "../../../validations/types"
 
 export const ModalAddProduct = () => {
   const { isOpen, onClose, createProduct } = useAdminContext()
@@ -25,7 +25,7 @@ export const ModalAddProduct = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IProduct>({
+  } = useForm<IProductForm>({
     resolver: zodResolver(Product),
   })
 
