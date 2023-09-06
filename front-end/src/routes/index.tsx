@@ -5,6 +5,7 @@ import { Home } from "../pages/Home"
 import { PrivateNoAdm } from "../components/PrivateNoAdm"
 import { AdminProvider } from "../contexts/adminContext"
 import { ProductProvider } from "../contexts/productContext"
+import { CartProvider } from "../contexts/cartContext"
 
 const RoutesIndex = () => {
   return (
@@ -12,9 +13,11 @@ const RoutesIndex = () => {
       <Route
         path="/"
         element={
-          <ProductProvider>
-            <Home />
-          </ProductProvider>
+          <CartProvider>
+            <ProductProvider>
+              <Home />
+            </ProductProvider>
+          </CartProvider>
         }
       />
       <Route path="/auth" element={<AuthPage />} />
