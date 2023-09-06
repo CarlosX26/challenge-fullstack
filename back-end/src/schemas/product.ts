@@ -20,6 +20,7 @@ const Product = z.object({
 const ProductUpdate = Product.partial()
 
 const ProductReturn = Product.extend({
+  id: z.string(),
   user: UserReturn,
 })
 
