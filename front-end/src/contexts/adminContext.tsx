@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { IAdminContext, IModal, IProductAdmin } from "./types"
+import { IAdminContext, IModal, IProduct } from "./types"
 import { useDisclosure } from "@chakra-ui/react"
-import { IProduct } from "../validations/types"
+import { IProductForm } from "../validations/types"
 import { toast } from "react-hot-toast"
 import api from "../utils/axios"
 
@@ -10,8 +10,8 @@ const AdminContext = createContext({} as IAdminContext)
 export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
 
-  const [adminProducts, setAdminProducts] = useState<IProductAdmin[]>([])
-  const [currentProduct, setCurrentProduct] = useState<IProductAdmin>()
+  const [adminProducts, setAdminProducts] = useState<IProduct[]>([])
+  const [currentProduct, setCurrentProduct] = useState<IProduct>()
   const [modal, setModal] = useState<IModal>("addProduct")
 
   const openModalAddProduct = () => {
@@ -52,7 +52,7 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
-  const createProduct = async (productData: IProduct) => {
+  const createProduct = async (productData: IProductForm) => {
     try {
       const token = localStorage.getItem("@BESTSHOP:TOKEN")
 
@@ -70,7 +70,7 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
-  const updateProduct = async (productData: IProduct) => {
+  const updateProduct = async (productData: IProductForm) => {
     try {
       const token = localStorage.getItem("@BESTSHOP:TOKEN")
 
