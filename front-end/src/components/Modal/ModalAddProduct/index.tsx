@@ -19,7 +19,7 @@ import { Product } from "../../../validations/product"
 import { IProduct } from "../../../validations/types"
 
 export const ModalAddProduct = () => {
-  const { isOpen, onClose } = useAdminContext()
+  const { isOpen, onClose, createProduct } = useAdminContext()
 
   const {
     register,
@@ -36,7 +36,7 @@ export const ModalAddProduct = () => {
       <ModalContent>
         <ModalHeader>Adicionar produto</ModalHeader>
         <ModalCloseButton />
-        <ModalBody as={"form"} onSubmit={handleSubmit(() => {})}>
+        <ModalBody as={"form"} onSubmit={handleSubmit(createProduct)}>
           <VStack>
             <FormControl>
               <FormLabel>Nome do produto</FormLabel>
@@ -106,7 +106,7 @@ export const ModalAddProduct = () => {
               )}
             </FormControl>
 
-            <Button mt="16px" type="submit">
+            <Button w="100%" mt="16px" type="submit">
               Adicionar produto
             </Button>
           </VStack>
