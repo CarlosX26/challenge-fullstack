@@ -32,6 +32,8 @@ interface ICartContext {
   onClose(): void
   onOpen(): void
   addProduct(productId: string): void
+  updateProduct(productId: string, amount: number): Promise<void>
+  deleteProduct(productId: string): Promise<void>
   cartList: ICartProduct[]
 }
 
