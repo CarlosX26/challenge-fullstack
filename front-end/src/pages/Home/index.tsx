@@ -3,6 +3,7 @@ import { Header } from "../../components/Header"
 import { Container } from "../../components/Container"
 import { CardProduct } from "../../components/CardProduct"
 import { useProductContext } from "../../contexts/productContext"
+import { ModalCart } from "../../components/Modal/ModalCart"
 
 export const Home = () => {
   const { products } = useProductContext()
@@ -27,6 +28,7 @@ export const Home = () => {
           ))}
         </Grid>
       </Container>
+      <ModalCart />
     </>
   )
 }
