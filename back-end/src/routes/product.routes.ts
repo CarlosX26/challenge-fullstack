@@ -6,6 +6,7 @@ import { Product, ProductUpdate } from "../schemas/product"
 import {
   createProductController,
   deleteProductController,
+  readProductsAdmController,
   readProductsController,
   updateProductController,
 } from "../controllers/product.controllers"
@@ -20,6 +21,12 @@ productRouter.post(
   createProductController
 )
 productRouter.get("", readProductsController)
+productRouter.get(
+  "/admin",
+  verifyUserAuthMiddleware,
+  verifyUserIsAdmMiddleware,
+  readProductsAdmController
+)
 productRouter.patch(
   "/:id",
   verifyUserAuthMiddleware,
