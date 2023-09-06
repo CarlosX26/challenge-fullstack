@@ -1,4 +1,4 @@
-import { Grid } from "@chakra-ui/react"
+import { Grid, Heading } from "@chakra-ui/react"
 import { Header } from "../../components/Header"
 import { Container } from "../../components/Container"
 import { CardProduct } from "../../components/CardProduct"
@@ -6,12 +6,21 @@ import { useProductContext } from "../../contexts/productContext"
 import { ModalCart } from "../../components/Modal/ModalCart"
 
 export const Home = () => {
-  const { products } = useProductContext()
+  const { products, filter } = useProductContext()
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(filter.toLowerCase())
+  )
 
   return (
     <>
       <Header />
       <Container>
+        {filter && (
+          <Heading fontSize="lg" pt="32px">
+            Resultados encontrados para: {filter}
+          </Heading>
+        )}
         <Grid
           as={"ul"}
           py="32px"
@@ -23,7 +32,7 @@ export const Home = () => {
           }}
           gap="1rem"
         >
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <CardProduct key={product.id} product={product} />
           ))}
         </Grid>

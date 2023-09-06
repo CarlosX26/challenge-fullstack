@@ -14,9 +14,11 @@ import {
 import { Logo } from "../Logo"
 import { Link, useLocation } from "react-router-dom"
 import { useAuthContext } from "../../contexts/authContext"
-import { SearchIcon } from "@chakra-ui/icons"
-import cartIcon from "../../assets/shoppingCart.svg"
+import { CloseIcon, SearchIcon } from "@chakra-ui/icons"
 import { useCartContext } from "../../contexts/cartContext"
+import { useState } from "react"
+import cartIcon from "../../assets/shoppingCart.svg"
+import { useProductContext } from "../../contexts/productContext"
 
 export const Header = () => {
   const location = useLocation()
@@ -25,9 +27,22 @@ export const Header = () => {
 
   const { onOpen, cartList } = useCartContext()
 
+  const { filter, setFilter } = useProductContext()
+
   const isAdm = location.pathname.includes("adm")
 
   const totalItems = cartList.reduce((acc, acv) => acc + acv.amount, 0)
+
+  const [input, setInput] = useState("")
+
+  const searchProduct = () => {
+    setFilter(input)
+  }
+
+  const cleanSearch = () => {
+    setInput("")
+    setFilter("")
+  }
 
   return (
     <Flex as={"header"} w="100%" borderBottom="2px" borderColor="teal.600">
@@ -71,8 +86,22 @@ export const Header = () => {
                 type="text"
                 placeholder="Pesquise um item"
                 variant="filled"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
               />
-              <IconButton aria-label="Search product" icon={<SearchIcon />} />
+              {!filter ? (
+                <IconButton
+                  aria-label="cearch product"
+                  icon={<SearchIcon />}
+                  onClick={searchProduct}
+                />
+              ) : (
+                <IconButton
+                  aria-label="clean search"
+                  icon={<CloseIcon />}
+                  onClick={cleanSearch}
+                />
+              )}
             </Flex>
           )}
 
