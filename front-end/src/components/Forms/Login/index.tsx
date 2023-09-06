@@ -37,8 +37,6 @@ export const FormLogin = ({ setForm }: IFormLogin) => {
     isAdm ? loginUserAdm(loginData) : loginUser(loginData)
   }
 
-  console.log(errors)
-
   return (
     <Flex
       as={motion.div}
