@@ -20,6 +20,15 @@ productRouter.post(
   verifySchemaMiddleware(Product),
   createProductController
 )
+/**
+ * @swagger
+ * /products:
+ *   get:
+ *     summary: get all products.
+ *     responses:
+ *       '200':
+ *         description: Sucesso. Return list of products.
+ */
 productRouter.get("", readProductsController)
 productRouter.get(
   "/admin",
