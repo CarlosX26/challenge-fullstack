@@ -26,6 +26,8 @@ interface IAdminContext {
 }
 interface IProductContext {
   products: IProduct[]
+  filter: string
+  setFilter: React.Dispatch<React.SetStateAction<string>>
 }
 interface ICartContext {
   isOpen: boolean
