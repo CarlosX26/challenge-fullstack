@@ -1,6 +1,8 @@
 import { z } from "zod"
-import { Cart } from "../schemas/cart"
+import { Cart, CartReturn } from "../schemas/cart"
 
 type ICart = z.infer<typeof Cart>
 
-export type { ICart }
+type ICartReturn = z.infer<typeof CartReturn>
+
+export type { ICart, ICartReturn }

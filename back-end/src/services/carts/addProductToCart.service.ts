@@ -4,13 +4,14 @@ import { Cart } from "../../entities/cart.entity"
 import { Product } from "../../entities/product.entity"
 import { ProductCart } from "../../entities/productCart.entity"
 import { User } from "../../entities/user.entity"
-import { ICart } from "../../interfaces/cart"
+import { ICart, ICartReturn } from "../../interfaces/cart"
+import { CartReturn } from "../../schemas/cart"
 
 const addProductToCartService = async (
   { amount }: ICart,
   productId: string,
   userId: string
-): Promise<{ message: string }> => {
+): Promise<ICartReturn> => {
   const cartRepo = AppDataSource.getRepository(Cart)
   const productCartRepo = AppDataSource.getRepository(ProductCart)
   const productRepo = AppDataSource.getRepository(Product)
@@ -56,13 +57,13 @@ const addProductToCartService = async (
     await cartRepo.save(cart)
   }
 
-  await productCartRepo.save({
+  const cartItem = await productCartRepo.save({
     amount,
     cart,
     product,
   })
 
-  return { message: "Product successfully added." }
+  return CartReturn.parse(cartItem)
 }
 
 export default addProductToCartService

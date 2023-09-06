@@ -2,13 +2,14 @@ import AppDataSource from "../../data-source"
 import AppError from "../../error"
 import { Product } from "../../entities/product.entity"
 import { ProductCart } from "../../entities/productCart.entity"
-import { ICart } from "../../interfaces/cart"
+import { ICart, ICartReturn } from "../../interfaces/cart"
+import { CartReturn } from "../../schemas/cart"
 
 const updateProductToCartService = async (
   { amount }: ICart,
   productId: string,
   userId: string
-): Promise<{ message: string }> => {
+): Promise<ICartReturn> => {
   const productCartRepo = AppDataSource.getRepository(ProductCart)
   const productRepo = AppDataSource.getRepository(Product)
 
@@ -32,15 +33,18 @@ const updateProductToCartService = async (
         id: productId,
       },
     },
+    relations: {
+      product: true,
+    },
   })
 
   if (!productInCart) {
     throw new AppError("Product not found.", 404)
   }
 
-  await productCartRepo.save({ ...productInCart, amount })
+  const cartItem = await productCartRepo.save({ ...productInCart, amount })
 
-  return { message: "Product successfully updated." }
+  return CartReturn.parse(cartItem)
 }
 
 export default updateProductToCartService
