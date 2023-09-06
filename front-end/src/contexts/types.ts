@@ -1,4 +1,4 @@
-import { ILogin, IRegister } from "../validations/types"
+import { ILogin, IProduct, IRegister } from "../validations/types"
 
 interface IAuthContext {
   loginUser(loginData: ILogin): Promise<void>
@@ -20,6 +20,7 @@ interface IAdminContext {
   isOpen: boolean
   onOpen(): void
   onClose(): void
+  createProduct(productData: IProduct): Promise<void>
 }
 
 export type { IAuthContext, IUser, IAdminContext }
