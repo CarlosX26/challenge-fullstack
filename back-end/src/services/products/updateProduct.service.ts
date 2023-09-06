@@ -15,6 +15,12 @@ const updateProductService = async (
     throw new AppError("Product not found.", 404)
   }
 
+  const productName = await productRepo.findOneBy({ name: payload.name })
+
+  if (productName?.id !== productId) {
+    throw new AppError("There is already a product with that name.", 400)
+  }
+
   const productUpdated = await productRepo.save({ ...product, ...payload })
 
   return productUpdated
