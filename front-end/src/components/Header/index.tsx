@@ -25,12 +25,11 @@ export const Header = () => {
 
   const { user, logout } = useAuthContext()
   const { onOpen, totalItems } = useCartContext()
-
   const { filter, setFilter } = useProductContext()
 
-  const isAdm = location.pathname.includes("adm")
-
   const [input, setInput] = useState("")
+
+  const isAdm = location.pathname.includes("adm")
 
   const searchProduct = () => {
     setFilter(input)
@@ -50,10 +49,16 @@ export const Header = () => {
         alignItems="center"
         justifyContent="space-between"
         minH="72px"
+        flexDir={{ base: "column", md: "row" }}
       >
         <Logo />
 
-        <Flex alignItems="center" gap="16px">
+        <Flex
+          alignItems="center"
+          gap="16px"
+          flexDir={{ base: "column", md: "row" }}
+          py={{ base: "16px", md: "0" }}
+        >
           {!isAdm && (
             <Flex gap="16px" alignItems="center">
               <Button variant="unstyled" onClick={onOpen} pos="relative">
