@@ -5,6 +5,7 @@ import { ModalAddProduct } from "../../components/Modal/ModalAddProduct"
 import { DashboardOptions } from "../../components/DashboardOptions"
 import { ModalEditProduct } from "../../components/Modal/ModalEditProduct"
 import { useAdminContext } from "../../contexts/adminContext"
+import { ModalDeleteProduct } from "../../components/Modal/ModalDeleteProduct"
 
 export const Dashboard = () => {
   const { modal } = useAdminContext()
@@ -14,6 +15,7 @@ export const Dashboard = () => {
   } = {
     addProduct: <ModalAddProduct />,
     editProduct: <ModalEditProduct />,
+    deleteProduct: <ModalDeleteProduct />,
   }
 
   return (
