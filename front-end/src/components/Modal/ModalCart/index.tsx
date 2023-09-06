@@ -14,7 +14,7 @@ import { useCartContext } from "../../../contexts/cartContext"
 import { ModalCartCardProduct } from "./ModalCartCardProduct"
 
 export const ModalCart = () => {
-  const { isOpen, onClose, cartList } = useCartContext()
+  const { isOpen, onClose, cartList, checkout, loading } = useCartContext()
 
   const totalCart = cartList.reduce(
     (acc, acv) => acc + acv.amount * acv.product.price,
@@ -51,8 +51,14 @@ export const ModalCart = () => {
                   })}
                 </Text>
               </Flex>
-              <Button mt="16px" type="submit">
-                Finalizar compra
+              <Button
+                disabled={loading}
+                mt="16px"
+                type="submit"
+                onClick={checkout}
+              >
+                {!loading && "Finalizar compra"}
+                {loading && "Enviando pedido..."}
               </Button>
             </Flex>
           </VStack>

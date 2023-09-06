@@ -12,6 +12,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const navigate = useNavigate()
   const { user } = useAuthContext()
+  const [loading, setLoading] = useState(false)
 
   const [cartList, serCartList] = useState<ICartProduct[]>([])
 
@@ -115,6 +116,30 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
+  const checkout = async () => {
+    try {
+      setLoading(true)
+      const token = localStorage.getItem("@BESTSHOP:TOKEN")
+      await api.post(
+        "/carts/checkout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+
+      serCartList([])
+      toast.success("Em instantes você receberá um email de confirmação")
+      onClose()
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -125,6 +150,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         addProduct,
         updateProduct,
         deleteProduct,
+        checkout,
+        loading,
       }}
     >
       {children}

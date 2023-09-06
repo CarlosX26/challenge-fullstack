@@ -37,6 +37,8 @@ interface ICartContext {
   updateProduct(productId: string, amount: number): Promise<void>
   deleteProduct(productId: string): Promise<void>
   cartList: ICartProduct[]
+  checkout(): Promise<void>
+  loading: boolean
 }
 
 type IModal = "addProduct" | "editProduct" | "deleteProduct"
