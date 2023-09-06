@@ -18,9 +18,28 @@ interface IUser {
 
 interface IAdminContext {
   isOpen: boolean
-  onOpen(): void
+  modal: IModal
+  adminProducts: IProductAdmin[]
+  currentProduct: IProductAdmin | undefined
   onClose(): void
+  openModalAddProduct(): void
+  openModalEditProduct(): void
+  openModalDeleteProduct(): void
+  handleProduct(productId: string): void
   createProduct(productData: IProduct): Promise<void>
+  updateProduct(productData: IProduct): Promise<void>
+  deleteProduct(): Promise<void>
 }
 
-export type { IAuthContext, IUser, IAdminContext }
+export type IModal = "addProduct" | "editProduct" | "deleteProduct"
+
+interface IProductAdmin {
+  id: string
+  name: string
+  description: string
+  imgUrl: string
+  inventory: number
+  price: number
+}
+
+export type { IAuthContext, IUser, IAdminContext, IProductAdmin }

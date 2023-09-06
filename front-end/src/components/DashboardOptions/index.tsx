@@ -3,7 +3,8 @@ import { useAdminContext } from "../../contexts/adminContext"
 import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons"
 
 export const DashboardOptions = () => {
-  const { onOpen } = useAdminContext()
+  const { openModalAddProduct, openModalEditProduct, openModalDeleteProduct } =
+    useAdminContext()
 
   const options: {
     name: string
@@ -13,17 +14,17 @@ export const DashboardOptions = () => {
     {
       name: "Adicionar produto",
       icon: AddIcon,
-      action: onOpen,
+      action: openModalAddProduct,
     },
     {
       name: "Editar produto",
       icon: EditIcon,
-      action: () => {},
+      action: openModalEditProduct,
     },
     {
       name: "Deletar produto",
       icon: DeleteIcon,
-      action: () => {},
+      action: openModalDeleteProduct,
     },
   ]
   return (
