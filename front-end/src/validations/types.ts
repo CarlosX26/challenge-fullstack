@@ -6,6 +6,6 @@ type ILogin = z.infer<typeof Login>
 
 type IRegister = z.infer<typeof Register>
 
-type IProduct = z.infer<typeof Product>
+type IProductForm = z.infer<typeof Product>
 
-export type { ILogin, IRegister, IProduct }
+export type { ILogin, IRegister, IProductForm }
