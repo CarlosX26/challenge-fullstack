@@ -10,12 +10,6 @@ interface IAuthContext {
   logout(): void
 }
 
-interface IUser {
-  name: string
-  email: string
-  isAdm: boolean
-}
-
 interface IAdminContext {
   isOpen: boolean
   modal: IModal
@@ -30,8 +24,24 @@ interface IAdminContext {
   updateProduct(productData: IProductForm): Promise<void>
   deleteProduct(): Promise<void>
 }
+interface IProductContext {
+  products: IProduct[]
+}
+interface ICartContext {
+  isOpen: boolean
+  onClose(): void
+  onOpen(): void
+  addProduct(productId: string): void
+  cartList: ICartProduct[]
+}
 
 type IModal = "addProduct" | "editProduct" | "deleteProduct"
+
+interface IUser {
+  name: string
+  email: string
+  isAdm: boolean
+}
 
 interface IProduct {
   id: string
@@ -42,8 +52,10 @@ interface IProduct {
   price: number
 }
 
-interface IProductContext {
-  products: IProduct[]
+interface ICartProduct {
+  id: string
+  amount: number
+  product: IProduct
 }
 
 export type {
@@ -53,4 +65,6 @@ export type {
   IProduct,
   IModal,
   IProductContext,
+  ICartContext,
+  ICartProduct,
 }
