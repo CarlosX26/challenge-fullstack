@@ -21,14 +21,8 @@ import { IProductForm } from "../../../validations/types"
 import { ChangeEvent } from "react"
 
 export const ModalEditProduct = () => {
-  const {
-    isOpen,
-    onClose,
-    adminProducts,
-    updateProduct,
-    currentProduct,
-    setCurrentProduct,
-  } = useAdminContext()
+  const { isOpen, onClose, adminProducts, updateProduct, setCurrentProduct } =
+    useAdminContext()
 
   const {
     register,
@@ -37,7 +31,6 @@ export const ModalEditProduct = () => {
     setValue,
   } = useForm<IProductForm>({
     resolver: zodResolver(Product),
-    defaultValues: { ...currentProduct },
   })
 
   const changeProduct = (e: ChangeEvent<HTMLSelectElement>) => {
