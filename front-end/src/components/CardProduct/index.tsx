@@ -30,6 +30,9 @@ export const CardProduct = ({ product }: { product: IProduct }) => {
             currentTarget.onerror = null
             currentTarget.src = noImg
           }}
+          objectFit="cover"
+          h="200px"
+          w="100%"
         />
 
         <VStack>
