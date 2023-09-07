@@ -7,11 +7,15 @@ const Product = z.object({
   inventory: z
     .string()
     .nonempty("Campo vazio")
-    .transform((inventory) => Number(inventory)),
+    .or(z.number())
+    .transform((inventory) =>
+      typeof inventory == "string" ? Number(inventory) : inventory
+    ),
   price: z
     .string()
     .nonempty("Campo vazio")
-    .transform((price) => Number(price)),
+    .or(z.number())
+    .transform((price) => (typeof price == "string" ? Number(price) : price)),
 })
 
 export { Product }
