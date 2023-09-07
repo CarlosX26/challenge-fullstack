@@ -38,6 +38,13 @@ Rodando front-end
   npm run dev
 ```
 
+## Rotas front-end
+
+- "/" -> acessar todos os produtos e ver carrinho.
+- "/auth" -> fazer autenticação e se cadastrar.
+- "/adm/auth" -> fazer autenticação como adm ou se cadastrar como adm.
+- "/adm/dashboard" -> dashboard do adm para gerenciar produtos.
+
 Rodando back-end
 
 ```bash
@@ -81,6 +88,12 @@ Rodando back-end
   yarn dev
   # or
   npm run dev
+```
+
+## Documentação da API
+
+```http
+    GET - /api-docs/
 ```
 
 ## Stack utilizada
