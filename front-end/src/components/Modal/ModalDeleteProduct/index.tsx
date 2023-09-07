@@ -14,11 +14,13 @@ import { useAdminContext } from "../../../contexts/adminContext"
 import { ChangeEvent, FormEvent } from "react"
 
 export const ModalDeleteProduct = () => {
-  const { isOpen, onClose, adminProducts, deleteProduct, handleProduct } =
+  const { isOpen, onClose, adminProducts, deleteProduct, setCurrentProduct } =
     useAdminContext()
 
   const changeProduct = (e: ChangeEvent<HTMLSelectElement>) => {
-    handleProduct(e.target.value)
+    const productId = e.target.value
+    const product = adminProducts.find((product) => product.id === productId)
+    setCurrentProduct(product)
   }
 
   const handleSubmit = (e: FormEvent<HTMLDivElement>) => {
