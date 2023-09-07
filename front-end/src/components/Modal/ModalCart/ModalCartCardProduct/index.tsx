@@ -48,6 +48,7 @@ export const ModalCartCardProduct = ({
           currentTarget.src = noImg
         }}
         w="40%"
+        h="200px"
         alt="product_image"
         borderRadius="md"
       />
