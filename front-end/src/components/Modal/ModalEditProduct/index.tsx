@@ -27,7 +27,7 @@ export const ModalEditProduct = () => {
     adminProducts,
     updateProduct,
     currentProduct,
-    handleProduct,
+    setCurrentProduct,
   } = useAdminContext()
 
   const {
@@ -41,20 +41,22 @@ export const ModalEditProduct = () => {
   })
 
   const changeProduct = (e: ChangeEvent<HTMLSelectElement>) => {
-    handleProduct(e.target.value)
+    const productId = e.target.value
+    const product = adminProducts.find((product) => product.id === productId)
+    setCurrentProduct(product)
 
-    setValue("name", currentProduct!.name)
-    setValue("description", currentProduct!.description)
-    setValue("imgUrl", currentProduct!.imgUrl)
-    setValue("inventory", currentProduct!.inventory)
-    setValue("price", currentProduct!.price)
+    setValue("name", product!.name)
+    setValue("description", product!.description)
+    setValue("imgUrl", product!.imgUrl)
+    setValue("inventory", product!.inventory)
+    setValue("price", product!.price)
   }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
 
-      <ModalContent>
+      <ModalContent mx={{ base: "16px", sm: "0" }}>
         <ModalHeader>Editar produto</ModalHeader>
         <ModalCloseButton />
         <ModalBody as={"form"} onSubmit={handleSubmit(updateProduct)}>
@@ -67,7 +69,7 @@ export const ModalEditProduct = () => {
                 </option>
               ))}
             </Select>
-            <FormControl>
+            <FormControl isInvalid={Boolean(errors.name?.message)}>
               <FormLabel>Nome do produto</FormLabel>
               <Input
                 type="text"
@@ -75,12 +77,10 @@ export const ModalEditProduct = () => {
                 variant="filled"
                 {...register("name")}
               />
-              {errors.name?.message && (
-                <FormErrorMessage>{errors.name.message}</FormErrorMessage>
-              )}
+              <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
             </FormControl>
 
-            <FormControl>
+            <FormControl isInvalid={Boolean(errors.description?.message)}>
               <FormLabel>Descrição</FormLabel>
               <Input
                 type="text"
@@ -88,14 +88,10 @@ export const ModalEditProduct = () => {
                 variant="filled"
                 {...register("description")}
               />
-              {errors.description?.message && (
-                <FormErrorMessage>
-                  {errors.description.message}
-                </FormErrorMessage>
-              )}
+              <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
             </FormControl>
 
-            <FormControl>
+            <FormControl isInvalid={Boolean(errors.imgUrl?.message)}>
               <FormLabel>Imagem</FormLabel>
               <Input
                 type="text"
@@ -103,12 +99,10 @@ export const ModalEditProduct = () => {
                 variant="filled"
                 {...register("imgUrl")}
               />
-              {errors.imgUrl?.message && (
-                <FormErrorMessage>{errors.imgUrl?.message}</FormErrorMessage>
-              )}
+              <FormErrorMessage>{errors.imgUrl?.message}</FormErrorMessage>
             </FormControl>
 
-            <FormControl>
+            <FormControl isInvalid={Boolean(errors.inventory?.message)}>
               <FormLabel>Estoque</FormLabel>
               <Input
                 type="number"
@@ -116,12 +110,10 @@ export const ModalEditProduct = () => {
                 variant="filled"
                 {...register("inventory")}
               />
-              {errors.inventory?.message && (
-                <FormErrorMessage>{errors.inventory.message}</FormErrorMessage>
-              )}
+              <FormErrorMessage>{errors.inventory?.message}</FormErrorMessage>
             </FormControl>
 
-            <FormControl>
+            <FormControl isInvalid={Boolean(errors.price?.message)}>
               <FormLabel>Preço</FormLabel>
               <Input
                 type="number"
@@ -129,10 +121,7 @@ export const ModalEditProduct = () => {
                 variant="filled"
                 {...register("price")}
               />
-
-              {errors.price?.message && (
-                <FormErrorMessage>{errors.price.message}</FormErrorMessage>
-              )}
+              <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
             </FormControl>
 
             <Button w="100%" mt="16px" type="submit">

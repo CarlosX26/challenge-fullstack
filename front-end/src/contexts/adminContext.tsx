@@ -31,11 +31,6 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
     getAdminProducts()
   }, [])
 
-  const handleProduct = (productId: string) => {
-    const product = adminProducts.find((product) => product.id === productId)
-    setCurrentProduct(product)
-  }
-
   const getAdminProducts = async () => {
     try {
       const token = localStorage.getItem("@BESTSHOP:TOKEN")
@@ -138,7 +133,7 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
         createProduct,
         updateProduct,
         deleteProduct,
-        handleProduct,
+        setCurrentProduct,
       }}
     >
       {children}

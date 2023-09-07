@@ -13,8 +13,9 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
   const { user } = useAuthContext()
   const [loading, setLoading] = useState(false)
-
   const [cartList, serCartList] = useState<ICartProduct[]>([])
+
+  const totalItems = cartList.reduce((acc, acv) => acc + acv.amount, 0)
 
   useEffect(() => {
     getCartList()
@@ -144,6 +145,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     <CartContext.Provider
       value={{
         cartList,
+        totalItems,
         isOpen,
         onClose,
         onOpen,

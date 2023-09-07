@@ -19,7 +19,7 @@ interface IAdminContext {
   openModalAddProduct(): void
   openModalEditProduct(): void
   openModalDeleteProduct(): void
-  handleProduct(productId: string): void
+  setCurrentProduct: React.Dispatch<React.SetStateAction<IProduct | undefined>>
   createProduct(productData: IProductForm): Promise<void>
   updateProduct(productData: IProductForm): Promise<void>
   deleteProduct(): Promise<void>
@@ -39,6 +39,7 @@ interface ICartContext {
   cartList: ICartProduct[]
   checkout(): Promise<void>
   loading: boolean
+  totalItems: number
 }
 
 type IModal = "addProduct" | "editProduct" | "deleteProduct"

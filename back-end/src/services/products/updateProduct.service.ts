@@ -17,7 +17,7 @@ const updateProductService = async (
 
   const productName = await productRepo.findOneBy({ name: payload.name })
 
-  if (productName?.id !== productId) {
+  if (productName && productName?.id != productId) {
     throw new AppError("There is already a product with that name.", 400)
   }
 

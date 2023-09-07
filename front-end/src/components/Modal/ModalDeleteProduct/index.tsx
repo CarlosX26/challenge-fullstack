@@ -30,7 +30,7 @@ export const ModalDeleteProduct = () => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
 
-      <ModalContent>
+      <ModalContent mx={{ base: "16px", sm: "0" }}>
         <ModalHeader>Deletar produto</ModalHeader>
         <ModalCloseButton />
         <ModalBody as={"form"} onSubmit={handleSubmit}>

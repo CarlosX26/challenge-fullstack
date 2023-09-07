@@ -33,12 +33,12 @@ export const ModalAddProduct = () => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
 
-      <ModalContent>
+      <ModalContent mx={{ base: "16px", sm: "0" }}>
         <ModalHeader>Adicionar produto</ModalHeader>
         <ModalCloseButton />
         <ModalBody as={"form"} onSubmit={handleSubmit(createProduct)}>
           <VStack>
-            <FormControl>
+            <FormControl isInvalid={Boolean(errors.name?.message)}>
               <FormLabel>Nome do produto</FormLabel>
               <Input
                 type="text"
@@ -46,12 +46,10 @@ export const ModalAddProduct = () => {
                 variant="filled"
                 {...register("name")}
               />
-              {errors.name?.message && (
-                <FormErrorMessage>{errors.name.message}</FormErrorMessage>
-              )}
+              <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
             </FormControl>
 
-            <FormControl>
+            <FormControl isInvalid={Boolean(errors.description?.message)}>
               <FormLabel>Descrição</FormLabel>
               <Input
                 type="text"
@@ -59,14 +57,10 @@ export const ModalAddProduct = () => {
                 variant="filled"
                 {...register("description")}
               />
-              {errors.description?.message && (
-                <FormErrorMessage>
-                  {errors.description.message}
-                </FormErrorMessage>
-              )}
+              <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
             </FormControl>
 
-            <FormControl>
+            <FormControl isInvalid={Boolean(errors.imgUrl?.message)}>
               <FormLabel>Imagem</FormLabel>
               <Input
                 type="text"
@@ -74,12 +68,10 @@ export const ModalAddProduct = () => {
                 variant="filled"
                 {...register("imgUrl")}
               />
-              {errors.imgUrl?.message && (
-                <FormErrorMessage>{errors.imgUrl?.message}</FormErrorMessage>
-              )}
+              <FormErrorMessage>{errors.imgUrl?.message}</FormErrorMessage>
             </FormControl>
 
-            <FormControl>
+            <FormControl isInvalid={Boolean(errors.inventory?.message)}>
               <FormLabel>Estoque</FormLabel>
               <Input
                 type="number"
@@ -87,12 +79,10 @@ export const ModalAddProduct = () => {
                 variant="filled"
                 {...register("inventory")}
               />
-              {errors.inventory?.message && (
-                <FormErrorMessage>{errors.inventory.message}</FormErrorMessage>
-              )}
+              <FormErrorMessage>{errors.inventory?.message}</FormErrorMessage>
             </FormControl>
 
-            <FormControl>
+            <FormControl isInvalid={Boolean(errors.price?.message)}>
               <FormLabel>Preço</FormLabel>
               <Input
                 type="number"
@@ -100,10 +90,7 @@ export const ModalAddProduct = () => {
                 variant="filled"
                 {...register("price")}
               />
-
-              {errors.price?.message && (
-                <FormErrorMessage>{errors.price.message}</FormErrorMessage>
-              )}
+              <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
             </FormControl>
 
             <Button w="100%" mt="16px" type="submit">
