@@ -57,9 +57,9 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
         },
       })
 
+      setAdminProducts((state) => [...state, data])
       toast.success("Produto adicionado")
       onClose()
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
@@ -90,7 +90,6 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
 
       toast.success("Produto atualizado")
       onClose()
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
