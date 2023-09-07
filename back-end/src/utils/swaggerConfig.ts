@@ -1,9 +1,9 @@
 import path from "path"
-import swaggerJSDoc, { Options } from "swagger-jsdoc"
+import swaggerJSDoc from "swagger-jsdoc"
 
 const routesPath = path.join(process.cwd(), "src/routes/**.{js,ts}")
 
-const options: Options = {
+const options = {
   definition: {
     openapi: "3.0.0",
     info: {
@@ -16,6 +16,15 @@ const options: Options = {
         description: "Development server",
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
   },
   apis: [routesPath],
 }
