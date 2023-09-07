@@ -56,7 +56,7 @@ export const FormRegister = ({ setForm }: IFormRegister) => {
         flexDir="column"
         gap="1rem"
       >
-        <FormControl>
+        <FormControl isInvalid={Boolean(errors.name?.message)}>
           <FormLabel>Nome</FormLabel>
           <Input
             type="text"
@@ -64,12 +64,10 @@ export const FormRegister = ({ setForm }: IFormRegister) => {
             {...register("name")}
             variant="filled"
           />
-          {errors.name?.message && (
-            <FormErrorMessage>{errors.name.message}</FormErrorMessage>
-          )}
+          <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
         </FormControl>
 
-        <FormControl>
+        <FormControl isInvalid={Boolean(errors.email?.message)}>
           <FormLabel>Email</FormLabel>
           <Input
             type="text"
@@ -77,12 +75,10 @@ export const FormRegister = ({ setForm }: IFormRegister) => {
             {...register("email")}
             variant="filled"
           />
-          {errors.email?.message && (
-            <FormErrorMessage>{errors.email.message}</FormErrorMessage>
-          )}
+          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
         </FormControl>
 
-        <FormControl>
+        <FormControl isInvalid={Boolean(errors.password?.message)}>
           <FormLabel>Senha</FormLabel>
           <Input
             type="password"
@@ -90,9 +86,7 @@ export const FormRegister = ({ setForm }: IFormRegister) => {
             {...register("password")}
             variant="filled"
           />
-          {errors.password?.message && (
-            <FormErrorMessage>{errors.password.message}</FormErrorMessage>
-          )}
+          <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
         </FormControl>
 
         <Button type="submit" variant="solid">
